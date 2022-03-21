@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ZeroChat</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+	<link rel='stylesheet' href='/stylesheets/normalize.css' />
+	<link rel='stylesheet' href='/stylesheets/base.css' />
+	<% if (typeof theme != "undefined" && locals.config.isValidTheme(theme)) { %>
+	<link rel='stylesheet' href='/themes/<%= theme %>.css' />
+	<% } else if (typeof user != "undefined" && typeof user.theme != "undefined" && locals.config.isValidTheme(user.theme)) { %>
+	<link rel='stylesheet' href='/themes/<%= user.theme %>.css' />
+	<% } else { %>
+	<link rel='stylesheet' href='/themes/<%= locals.config.DEFAULT_THEME %>.css' />
+	<% } %>
+	
+	<% if (typeof redirect != "undefined") { %>
+	<meta http-equiv="refresh" content="3; url=<%= redirect %>">
+	<% } %>
+</head>
+
+<body>
+	<% if (typeof url != "undefined" && !url.startsWith("_")) { %>
+	<a tabindex="-1" href="/<%= url %>" title="URL" id="logo">
+		<img src="/images/z_black.png" alt="ZeroChat" title="ZeroChat">
+		<span>/<%= url %></span>
+	</a>
+	<% } %>
+	<%- include(page) %>
